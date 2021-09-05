@@ -1,0 +1,30 @@
+version: "3"
+services:
+    api:
+        container_name: veggies-api
+        restart: always
+        build: ./api # building the same dockerfile we are having
+        ports:
+            - "80:3005"
+        depends_on:
+            - mysql
+    client:
+        container_name: veggies-ui
+        restart: always
+        build: ./ui # building the same dockerfile we are having
+        ports:
+            - "3000:3000"
+        links:
+            - api
+    mysql:
+        container_name: mysql_db
+        image: mysql:5.7
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+        restart: always
+        expose:
+            - "3306"
+        volumes:
+            - ./data:/data/db
+        ports:
+            - "3306:3306"

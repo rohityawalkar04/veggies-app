@@ -1,0 +1,20 @@
+default: &default
+  adapter: mysql2
+  pool: 5
+  timeout: 5000
+  port: 3306
+  host: mysql_db
+  username: root
+  password: root
+
+development:
+  <<: *default
+  database: farm-fresh-development
+
+test:
+  <<: *default
+  database: farm-fresh-test
+
+production:
+  <<: *default
+  database: farm-fresh-production
